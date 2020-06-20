@@ -2,12 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
+import pytz
+import datetime
 # Create your models here.
 class Question(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)  #user who is logged in
     title=models.CharField(max_length=200) # title of qestion
     question=models.TextField() #question
-    created_time= models.DateTimeField(default=timezone.localtime().now()) #question creation time
+    created_time= models.DateTimeField(default=datetime.datetime.now(tz=pytz.UTC).astimezone(pytz.timezone('Asia/Kolkata'))) #question creation time
     answer_count=models.IntegerField(default=0) #total reply or answer count
     qustion_upvote=models.IntegerField(default=0) #question upvote
     question_downvote=models.IntegerField(default=0) #question q
