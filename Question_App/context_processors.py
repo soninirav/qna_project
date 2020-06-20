@@ -12,11 +12,13 @@ def trending_question_context(request):
                 temp=[]
                 temp.append(i['id']) #id of question
                 temp.append(Question.objects.values('question').filter(id=i['id'])[0]['question'])
+                temp.append(Answer.objects.values('answer').filter(selected_question=i['id']).count())
                 if temp[0] not in [l[0] for l in list_of_trending_questions]:
                     list_of_trending_questions.append(temp)
                     #print('id=',temp[0])
                     #print('Q=',temp[1])
                     #print('count=',top_que_count)
+                    
 
 
 

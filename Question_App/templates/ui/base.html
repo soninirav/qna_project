@@ -109,7 +109,7 @@
 
                           <!--trending-question-->
                           {% for t in trending_question %}
-                            <a href="{% url 'question-detail' t.0 %}" style="text-decoration:none;"><p class="card-text"><small style="color:black;">*</small> {{ t.1 }}</p></a><br>
+                            <a href="{% url 'question-detail' t.0 %}" style="text-decoration:none;"><p class="card-text"><small style="color:black;">*</small> {{ t.1 }} <small style="color:black;">({{ t.2 }} Anwers)</small> </p></a><br>
                           {% endfor %}
 
                         </div>
