@@ -5,6 +5,16 @@ from django.urls import reverse
 import pytz
 import datetime
 # Create your models here.
+
+def times_ago_helper(diff):
+    if diff.days > 0:
+        return f'{diff.days} days ago'
+    if diff.seconds < 60:
+        return f'{diff.seconds} seconds ago'
+    if diff.seconds < 3600:
+        return f'{diff.seconds // 60} minutes ago'
+    return f'{diff.seconds // 3600} hours ago'
+
 class Question(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)  #user who is logged in
     title=models.CharField(max_length=200) # title of qestion
@@ -13,6 +23,10 @@ class Question(models.Model):
     answer_count=models.IntegerField(default=0) #total reply or answer count
     qustion_upvote=models.IntegerField(default=0) #question upvote
     question_downvote=models.IntegerField(default=0) #question q
+
+    def times_ago(self):
+        diff = timezone.now() - self.created_time
+        return times_ago_helper(diff)
 
     def __str__(self):
         return self.question

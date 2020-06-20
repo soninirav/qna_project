@@ -24,13 +24,14 @@
         <p class="card-text">Q : <a href="{% url 'question-detail' i.pk %}">{{ i.question }}</a></p>
       </div>
       <!--<div class="col-sm-2">{{ i.answer_count }} <span class="material-icons">star_border</span></div>-->
-      <div class="col-sm-2">{{ i.created_time }}</div> <!--{{ i.created_time.date }} for date-->
+      <!--<div class="col-sm-4">{{ i.created_time }} ,{{ i.times_ago }}</div>-->
+      <div class="col-sm-2" style="margin-top:2%;">{{ i.times_ago }}</div> <!--{{ i.created_time.date }} for date-->
     </div>
 
   </div>
 
-  <div class="card-footer text-muted">
-    <a href="{% url 'question-detail' i.pk %}"><button type="button" name="button" class="btn btn-primary btn-xs "style="background-color:#3385ff; padding-left:2%; padding-right:2%;">Reply</button></a>
+  <div class="card-footer text-muted pb-2 pt-2">
+    <a href="{% url 'question-detail' i.pk %}"><button type="button" name="button" class="btn btn-primary btn-xs"style="background-color:#3385ff; padding-left:2%; padding-right:2%;">Reply</button></a>
 {% if user.is_authenticated %}
   {% if request.user == i.user %}
       <a href="{% url 'question-update' i.pk %}"><button type="button" name="button" class="btn btn-info btn-xs " style="background-color:; padding-left:2%; padding-right:2%;">Edit</button></a>

@@ -7,6 +7,7 @@ from .forms import AnswerForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core.paginator import Paginator
+import datetime
 
 #from collections import OrderedDict
 #from django.views.generic import View
@@ -16,11 +17,11 @@ from django.core.paginator import Paginator
 
 def index(request):
     context={
-        'q_list':Question.objects.all(),
+        'q_list':Question.objects.all().order_by('-created_time'),
         'A_list':Answer.objects.all(),
-
+        
     }
-    return render(request,'Question_App/index.html',context)
+    return render(request,'ui/index.html',context)
 
 
 
@@ -62,12 +63,7 @@ def MyAnswerListView(request):
     }
     return render(request,'ui/my_answer_list.html',context)
 
-class QuestionListView(ListView):
-    model=Question
-    template_name='ui/index.html'
-    context_object_name='q_list'
-    ordering=['-created_time']
-    #paginate_by=5
+
 
 
 def AnswerCreateDetailView(request,pk):
@@ -104,6 +100,7 @@ class QuestionCreateView(LoginRequiredMixin,SuccessMessageMixin,CreateView):
     fields=['title','question']
     success_url='/'
     success_message="Question Created Succesfully !"
+
 
     def form_valid(self,form):
         form.instance.user=self.request.user
