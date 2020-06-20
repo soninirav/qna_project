@@ -1,0 +1,97 @@
+{% extends "Question_App/base.html" %}
+
+{% block content %}
+
+{% if messages %}
+  <div class="center" style=" margin-left:20%; margin-right:20%;">
+{% else %}
+  <div class="center" style=" margin-left:20%; margin-right:20%; margin-top:5%">
+{% endif %}
+
+ {% for i in q_list %}
+
+  <div class="card">
+
+    <div class="card-body">
+
+      <div class="row">
+        <div class="col-sm-10"><h6 class="">Asked By : <a href="#" style="text-decoration:none;">@{{ i.user }}</a> </h6>
+          <h6>Title : {{ i.title }}</h6>
+          <p class="card-text">Q : <a href="{% url 'question-detail' i.pk %}">{{ i.question }}</a></p>
+        </div>
+        <!--<div class="col-sm-2">{{ i.answer_count }} <span class="material-icons">star_border</span></div>-->
+        <div class="col-sm-2">{{ i.created_time }}</div> <!--{{ i.created_time.date }} for date-->
+      </div>
+
+
+
+    </div>
+{% if i.user == request.user %}
+<!--footer Part-->
+    <div class="card-footer text-muted">
+      <div class="container">
+      <div class="row">
+        <div class="col-sm"><a href="{% url 'question-detail' i.pk %}" style="text-decoration:none;">Reply</a></div>
+
+
+        <div class="col-sm"><a href="#" style="text-decoration:none;">Upvote</a></div>
+
+        <div class="col-sm"><a href="#" style="text-decoration:none;">Downvote</a></div>
+
+
+        <div class="col-sm"><!--<a href="#" style="text-decoration:none;">Downvote</a>--><strong><a style="color:green;"href="{% url 'question-update' i.pk %}"><button type="button" class="btn btn-outline-secondary btn-sm">Edit</button></a></strong></div>
+
+        <div class="col-sm"><!--<a href="#" style="text-decoration:none;">Downvote</a>--><strong><a style="color:red;"href="{% url 'question-delete' i.pk %}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a></strong></div>
+      </div>
+    </div>
+    </div>
+<!--else-->
+{% else %}
+<div class="card-footer text-muted">
+  <div class="container">
+  <div class="row">
+    <div class="col-sm"><a href="#" style="text-decoration:none;">Reply</a></div>
+
+    <div class="col-sm"><a href="#" style="text-decoration:none;">Upvote</a></div>
+
+    <div class="col-sm"><a href="#" style="text-decoration:none;">Downvote</a></div>
+
+    <div class="col-sm"><!--<a href="#" style="text-decoration:none;">Downvote</a>--><strong></strong></div>
+
+    <div class="col-sm"><!--<a href="#" style="text-decoration:none;">Downvote</a>--><strong></strong></div>
+  </div>
+</div>
+</div>
+{% endif %}
+
+
+<!-- footer Part end-->
+
+</div><br>
+
+{% endfor %}
+</div>
+
+{% if is_paginated %}
+<div  style=" margin-left:20%; margin-right:20%; text-align:center;">
+     {% if page_obj.has_previous %}
+       <a class="btn btn-outline-dark btn-sm mb-4" href="?page=1">First</a>
+       <a class="btn btn-outline-dark btn-sm mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+     {% endif %}
+
+     {% for num in page_obj.paginator.page_range %}
+       {% if page_obj.number == num %}
+         <a class="btn btn-dark btn-sm mb-4" href="?page={{ num }}">{{ num }}</a>
+       {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+         <a class="btn btn-outline-dark btn-sm mb-4" href="?page={{ num }}">{{ num }}</a>
+       {% endif %}
+     {% endfor %}
+
+     {% if page_obj.has_next %}
+       <a class="btn btn-outline-dark btn-sm mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+       <a class="btn btn-outline-dark btn-sm mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+     {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "ui/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% if messages %}
+  {% for m in messages %}
+  <div class="alert alert-{{ m.tags }}" style=" margin-right:5%;">
+    {{ m }}
+  </div>
+  {% endfor %}
+{% endif %}
+
+
+
+<div class="center jumbotron" style=" margin-left:2%; margin-right:4%;margin-top: 1%; background-color:#f0f5f5;">
+
+    <legend style="text-align:center; font-size:27px; font-weight:600;">-- Ask Question --</legend>
+    <form method="POST" >
+      {% csrf_token %}
+      {{ form|crispy }}
+      <div style="text-align:center;"><button type="submit" class="btn btn-md btn-primary" style="background-color:#0066ff; border-style:none!important;">Ask Question</button></div>
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "ui/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if messages %}
+  {% for m in messages %}
+  <div class="alert alert-{{ m.tags }}" style="margin-left:3%; margin-right:5%;">
+    {{ m }}
+  </div>
+  {% endfor %}
+{% endif %}
+
+
+<div class="center jumbotron" style=" margin-left:2%; margin-right:4%;margin-top: 1%; height:93%; background-color:#f0f5f5;">
+
+    <legend style="text-align:center; font-size:27px; font-weight:600;">-- Login --</legend>
+    <form method="POST" style=" border-style:none!important;">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <div style="text-align:center;"><button type="submit" class="btn btn-md btn-primary" style="background-color:#0066ff; border-style:none!important;">Login</button></div>
+    </form>
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

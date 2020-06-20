@@ -1,0 +1,17 @@
+{% extends "Question_App/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="center" style=" margin-left:20%; margin-right:20%; margin-top:5%">
+  <div class="jumbotron">
+    <legend style="text-align:center;" ><strong>Ask Question</strong></legend>
+    <form method="POST" >
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit" class="btn btn-outline-info">Ask Question</button>
+    </form>
+  </div>
+
+</div>
+
+{% endblock %}

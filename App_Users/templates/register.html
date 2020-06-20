@@ -1,0 +1,27 @@
+{% extends "ui/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+    <div class="center" style="margin-left:2%; margin-right:4%;margin-top: 1%; height:93%; background-color:#f0f5f5;">
+      <div class="jumbotron">
+          <form method="POST">
+              {% csrf_token %}
+              <fieldset class="form-group">
+                <legend style="text-align:center; font-size:27px; font-weight:600;">-- User Registeration --</legend>
+                  <div>
+                    {{ form|crispy }}
+                  </div>
+              </fieldset>
+              <div class="form-group">
+                  <button class="btn btn-md btn-primary" style="background-color:#0066ff; border-style:none!important;" type="submit" >Sign Up</button>
+              </div>
+          </form>
+
+      </div>
+    </div>
+
+
+{% endblock %}

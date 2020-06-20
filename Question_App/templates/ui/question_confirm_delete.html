@@ -1,0 +1,23 @@
+{% extends "ui/base.html" %}
+{% block content %}
+
+<div class="center jumbotron" style=" margin-left:2%; margin-right:4%;margin-top: 1%; background-color:#f0f5f5;">
+
+    <legend style="text-align:center; font-size:27px; font-weight:600;">-- Delete Question --</legend>
+    <form method="POST" >
+      {% csrf_token %}
+      <br><br>
+      <h5>Are You Sure You Want To Delete This Question ? </h5> <br> "{{ object.question }}"
+      <br><br><br>
+      <div style="text-align:center;">
+        <button type="submit" class="btn btn-md btn-primary" style="background-color:#ff4d4d; border-style:none!important;">Delete</button>
+        <a href="{% url 'home'  %}" class="btn btn-outline-secondary" style="border-style:none!important;" >Cancel</a>
+      </div>
+    </form>
+
+</div>
+
+
+
+
+{% endblock %}

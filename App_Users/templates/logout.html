@@ -1,0 +1,18 @@
+{% extends "ui/base.html" %}
+
+{% block content %}
+
+    <div class=" jubotron center" style=" margin-left:4%; margin-right:1%; margin-top:5%">
+      <h2>You have been logged out !</h2>
+      <div class="column">
+        <div ><h6 class="text-muted ">
+          <a href="{% url 'home' %}" style=" text-decoration: none;">Home</a></div>
+      </h6>
+        <div class=""><h6 class="text-muted ">
+            <a href="{% url 'login' %}" style=" text-decoration: none;">Log In Again</a>
+        </h6></div>
+      </div>
+
+    </div>
+
+{% endblock %}

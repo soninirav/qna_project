@@ -1,0 +1,54 @@
+{% extends "Question_App/base.html"%}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+{% if messages %}
+  <div class="card" style=" margin-left:20%; margin-right:20%;">
+{% else %}
+  <div class="card" style=" margin-left:20%; margin-right:20%; margin-top:5%">
+{% endif %}
+
+  <div class="card-header">
+    <strong>Q : {{ question }}</strong>
+  </div>
+{% if user.is_authenticated %}
+
+    <div style="margin-left:10%; margin-right:10%; margin-top:1%; margin-bottom:1%;">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-primary" style="margin-left:90%;" type="submit">Reply</button>
+      </form>
+    </div>
+
+{% endif %}
+
+
+  <ul class="list-group list-group-flush">
+    {% for i in A_list_filter %}
+      <li class="list-group-item">
+        <blockquote class="blockquote mb-0">
+          <p>{{ i }}.</p>
+          <footer class="blockquote-footer">@{{ i.user }}</footer>
+          {% if request.user == i.user %}
+          <strong><a style="color:red;"href="{% url 'answer-update' i.id %}"><button type="button" class="btn btn-outline-info btn-sm">Edit</button></a></strong>
+          <strong><a style="color:red;"href="{% url 'answer-delete' i.id %}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a></strong>
+          {% endif %}
+        </blockquote>
+      </li>
+  {% empty %}
+      <li class="list-group-item">
+        <blockquote class="blockquote mb-0">
+          <p>Nobody has answered this question !</p>
+          <footer></footer>
+        </blockquote>
+      </li>
+  {% endfor %}
+</ul>
+</div>
+
+
+
+
+{% endblock %}
