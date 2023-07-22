@@ -1,4 +1,4 @@
-# Auction App
+# QnA Web App
 
 Welcome to the QnA Web App - an interactive platform powered by Django framework! Engage in meaningful discussions with features like asking questions, commenting on answers, exploring trending questions, managing your asked questions, and even deleting them if needed. With secure sign-in and sign-up functionalities, connect with a community of knowledge seekers and experts to enhance your learning experience.
 
